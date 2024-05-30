@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+.load-button {
+  background-color: white;
+  color: black; 
+  border: none; 
+  padding: 8px 16px; 
+  border-radius: 4px;
+}
+
+.load-button:hover {
+  background-color: #999; /* Darker blue background color on hover */
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.show-more-button {
+  color: grey; 
+  border: none; 
+  padding: 8px 16px; 
+  border-radius: 4px;
+  display: block; /* Ensures button takes up full width */
+  margin: 0 auto; /* Centers the button horizontally */
+}
+
+.show-more-button:hover {
+  color: white; /* Darker blue background color on hover */
+  cursor: pointer; /* Show pointer cursor on hover */
+}
+
+.container {
+  overflow-y: auto;
+  height: 37vh;
+}
+
+.cfc {
+  --color-text: #fff;
+  --color-background: rgba(0, 0, 0, 0.5);
+  --color-property: #fae567;
+  --color-energy: #74c26b;
+
+  /* --fontFamily-sansSerif: Arial, sans-serif; */
+  --fontSize-base: 10px;
+
+  /* font-family: var(--fontFamily-sansSerif); */
+  font-size: var(--fontSize-base);
+  color: var(--color-text);
+  line-height: 1.5;
+  position: relative;
+}
+
+.cfc .inner-container {
+  display: flex;
+  gap: 48px;
+  overflow: auto;
+}
+
+.cfc svg {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.cfc .property {
+  color: var(--color-property);
+}
+
+.cfc .energy {
+  color: var(--color-energy);
+}
+
+.cfc text {
+  fill: currentColor;
+  user-select: none;
+}
+
+.cfc .stack-rect {
+  fill: none;
+  stroke: currentColor;
+  pointer-events: all;
+}
+
+.cfc .stack-text {
+  pointer-events: none;
+}
+
+.cfc .total-line {
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+
+.cfc .group-g .total-g {
+  pointer-events: none;
+}
+
+.cfc .link-path {
+  fill: none;
+  stroke: currentColor;
+}
+
+.cfc .tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  text-align: center;
+  background-color: var(--color-background);
+  /* border: 1px solid currentColor; */
+  border: none;
+  border-radius: 4px;
+  padding: 0.25em 0.5em;
+  box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.2s;
+}
+
+.cfc .tip.visible {
+  visibility: visible;
+  opacity: 1;
+}

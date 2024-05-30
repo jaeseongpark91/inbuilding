@@ -1,0 +1,35 @@
+# Dependencies
+/node_modules/
+
+# Next.js build & cache folders
+/.next/
+/.out/
+
+# Production build folder (if applicable)
+/build/
+
+# Testing
+/coverage/
+
+# Environment variables
+.env*  # Ignores all files starting with .env
+.env
+
+# Misc
+.DS_Store
+*.pem  # Private keys
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
+
+# Vercel deployment (if applicable)
+.vercel/
+
+# TypeScript (if applicable)
+*.tsbuildinfo
+next-env.d.ts
