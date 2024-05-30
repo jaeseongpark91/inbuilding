@@ -24,7 +24,7 @@ const darkTheme = createTheme({
     },
   });
 
-export const fetchPosts = async (url: string) => {
+const fetchPosts = async (url: string) => {
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error("Failed to fetch posts");
@@ -80,7 +80,7 @@ const Home = () => {
                             <Typography variant='body2' color="text.secondary">
                                 {mainData.address_1}
                             </Typography>
-                            <Grid container justify="center" alignItems="center" spacing={10} sx={{ mt: 3 }} >
+                            <Grid container justifyContent="center" alignItems="center" spacing={10} sx={{ mt: 3 }} >
                                 <Grid item xs={6}>
                                     <Map latitude={mainData.latitude} longitude={mainData.longitude} />
                                 </Grid>

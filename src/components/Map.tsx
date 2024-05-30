@@ -1,5 +1,6 @@
 import React from 'react';
 import { Prisma } from "@prisma/client";
+import Image from 'next/image';
 
 interface MapProps {
   latitude: Prisma.Decimal | null;
@@ -19,11 +20,15 @@ const Map: React.FC<MapProps> = ({ latitude, longitude }) => {
     
     return (
     <div style={{ display: 'flex', justifyContent: 'center'}}>
-        <img
+      <Image
         src={mapImageSrc}
         alt={`Static map image at latitude ${latitude}, longitude ${longitude}`}
-        style={{ width: width/1.5, height: height/1.5 }}
-        />
+        width={width / 1.5}
+        height={height / 1.5}
+        layout="fill"
+        objectFit="cover"
+        priority
+      />
     </div>
     
   );

@@ -3,10 +3,17 @@
 import { main } from '@prisma/client';
 import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
-import { fetchPosts } from '@/app/page';
 import { useState } from 'react'; 
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid'; 
 import Button from '@mui/material/Button';
+
+const fetchPosts = async (url: string) => {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error("Failed to fetch posts");
+    }
+    return response.json();
+};
 
 const SearchResult = (props: {onLoad: Function}) => {
     const search = useSearchParams();
