@@ -17,6 +17,7 @@
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "@vercel/postgres": "^0.8.0",
     "autoprefixer": "10.4.14",
     "d3": "^7.9.0",
     "deck.gl": "^9.0.14",
