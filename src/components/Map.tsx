@@ -25,7 +25,6 @@ const Map: React.FC<MapProps> = ({ latitude, longitude }) => {
         alt={`Static map image at latitude ${latitude}, longitude ${longitude}`}
         width={width / 1.5}
         height={height / 1.5}
-        layout="fill"
         objectFit="cover"
         priority
       />
