@@ -6,7 +6,6 @@ import { TextField } from '@mui/material';
 const SearchBar = () => {
     const [searchValue, setSearchValue] = useState('');
     const router = useRouter();
-    // const [isClicked, setIsClicked] = useState(false)
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

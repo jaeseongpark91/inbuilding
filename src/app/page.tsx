@@ -17,6 +17,7 @@ import Divider from '@mui/material/Divider';
 import Charts from "../components/Charts";
 import EnergyUsageTable from "../components/EnergyUsageTable";
 import CarbonFineTable from "../components/CarbonFineTable";
+import { Suspense } from 'react';
 
 const darkTheme = createTheme({
     palette: {
@@ -70,7 +71,9 @@ const Home = () => {
                         inbuilding
                     </Typography>
                     <SearchBar />
-                    <SearchResult onLoad={onLoad}/>
+                    <Suspense>
+                        <SearchResult onLoad={onLoad}/>
+                    </Suspense>
                     {mainData && propertyData && energyData && (
                         <div>
                             <Divider />
