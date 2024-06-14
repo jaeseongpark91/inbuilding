@@ -24,7 +24,7 @@ const EnergyUsageTable: React.FC<energyProps> = ({ energyData }) => {
             <Typography variant='h6' sx={{display: 'flex', justifyContent: 'left', alignItems: 'left'}}>
                 Energy Usage
             </Typography>
-            <TableContainer sx={{ width: 900, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <TableContainer sx={{ width: 1100, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <Table aria-label="energy">
                     <TableHead>
                         <TableRow>

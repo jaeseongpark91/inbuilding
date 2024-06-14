@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react';
-import { main, property, energy } from "@prisma/client";
+import { main, property, energy, violations } from "@prisma/client";
 import SearchBar from "../components/SearchBar";
 import SearchResult from "../components/SearchResult";
 import Map from "../components/Map";
@@ -17,6 +17,7 @@ import Divider from '@mui/material/Divider';
 import Charts from "../components/Charts";
 import EnergyUsageTable from "../components/EnergyUsageTable";
 import CarbonFineTable from "../components/CarbonFineTable";
+import ViolationTable from "../components/ViolationTable";
 import { Suspense } from 'react';
 
 const darkTheme = createTheme({
@@ -37,6 +38,7 @@ const Home = () => {
     const [mainData, setMainData] = useState<main | null>(null);
     const [propertyData, setPropertyData] = useState<{ property: Array<property> } | null>(null);
     const [energyData, setEnergyData] = useState<{ energy: Array<energy> } | null>(null);
+    const [violationData, setViolationData] = useState<{ violations: Array<violations> } | null>(null);
 
     const { data: property } = useSWR<{ property: Array<property> }>(
         mainData ? `api/search?table=property&q=${mainData.id}` : null,
@@ -45,6 +47,11 @@ const Home = () => {
 
     const { data: energy } = useSWR<{ energy: Array<energy> }>(
         mainData ? `api/search?table=energy&q=${mainData.id}` : null,
+        fetchPosts
+    );
+
+    const { data: violations } = useSWR<{ violations: Array<violations> }>(
+        mainData ? `api/search?table=violations&q=${mainData.nyc_borough_block_and_lot}` : null,
         fetchPosts
     );
 
@@ -59,7 +66,10 @@ const Home = () => {
         if (energy) {
             setEnergyData(energy)
         }
-    }, [property, energy]);
+        if (violations) {
+            setViolationData(violations)
+        }
+    }, [property, energy, violations]);
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -74,7 +84,7 @@ const Home = () => {
                     <Suspense>
                         <SearchResult onLoad={onLoad}/>
                     </Suspense>
-                    {mainData && propertyData && energyData && (
+                    {mainData && propertyData && energyData && violationData && (
                         <div>
                             <Divider />
                             <Typography variant='h5' sx={{display: 'flex', justifyContent: 'left', alignItems: 'left', mt: 3}}>
@@ -98,6 +108,9 @@ const Home = () => {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Charts propertyData={propertyData} energyData={energyData} propertyId={mainData.id} />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <ViolationTable violationData={violationData} />
                                 </Grid>
                             </Grid>
                         </div>

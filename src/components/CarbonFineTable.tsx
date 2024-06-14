@@ -24,7 +24,7 @@ const CarbonFineTable: React.FC<mainProps> = ({ mainData }) => {
             <Typography variant='h6' sx={{display: 'flex', justifyContent: 'left', alignItems: 'left'}}>
                 Carbon Emission & Fines
             </Typography>
-            <TableContainer sx={{ width: 900, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <TableContainer sx={{ width: 1100, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <Table aria-label="carbonFine">
                     <TableHead>
                         <TableRow>
