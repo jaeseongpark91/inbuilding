@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model main {
@@ -17,35 +18,35 @@ model main {
   address_1                   String?  @db.VarChar(255)
   city                        String?  @db.VarChar(255)
   postal_code                 String?  @db.VarChar(255)
-  latitude                    Decimal? @db.Decimal(10,6)
-  longitude                   Decimal? @db.Decimal(10,6)
+  latitude                    Decimal? @db.Decimal(10, 6)
+  longitude                   Decimal? @db.Decimal(10, 6)
   energy_star_score           String?  @db.VarChar(255)
   energy_grade                String?  @db.VarChar(255)
-  cce_total_2024_2029         Decimal? @db.Decimal(20,2)
-  cce_total_2030_2034         Decimal? @db.Decimal(20,2)
-  cap_2024_2029               Decimal? @db.Decimal(20,2)
-  cap_2030_2034               Decimal? @db.Decimal(20,2)
-  cap_2035_2039               Decimal? @db.Decimal(20,2)
-  cap_2040_2049               Decimal? @db.Decimal(20,2)
-  fines_2024_2029             Decimal? @db.Decimal(20,2)
-  fines_2030_2034             Decimal? @db.Decimal(20,2)
-  fines_2035_2039             Decimal? @db.Decimal(20,2)
-  fines_2040_2049             Decimal? @db.Decimal(20,2)
+  cce_total_2024_2029         Decimal? @db.Decimal(20, 2)
+  cce_total_2030_2034         Decimal? @db.Decimal(20, 2)
+  cap_2024_2029               Decimal? @db.Decimal(20, 2)
+  cap_2030_2034               Decimal? @db.Decimal(20, 2)
+  cap_2035_2039               Decimal? @db.Decimal(20, 2)
+  cap_2040_2049               Decimal? @db.Decimal(20, 2)
+  fines_2024_2029             Decimal? @db.Decimal(20, 2)
+  fines_2030_2034             Decimal? @db.Decimal(20, 2)
+  fines_2035_2039             Decimal? @db.Decimal(20, 2)
+  fines_2040_2049             Decimal? @db.Decimal(20, 2)
 }
 
 model property {
   property_id                        Int
   property_type                      String   @db.VarChar(20)
   property_use_type                  String?  @db.VarChar(100)
-  floor_area_sqft                    Decimal? @db.Decimal(20,2)
-  emissions_limit_2024_2029_tco2e_sf Decimal? @db.Decimal(20,2)
-  emissions_limit_2030_2034_tco2e_sf Decimal? @db.Decimal(20,2)
-  emissions_limit_2035_2039_tco2e_sf Decimal? @db.Decimal(20,2)
-  emissions_limit_2040_2049_tco2e_sf Decimal? @db.Decimal(20,2)
-  emission_cap_2024_2029_tco2        Decimal? @db.Decimal(20,2)
-  emission_cap_2030_2034_tco2        Decimal? @db.Decimal(20,2)
-  emission_cap_2035_2039_tco2        Decimal? @db.Decimal(20,2)
-  emission_cap_2040_2049_tco2        Decimal? @db.Decimal(20,2)
+  floor_area_sqft                    Decimal? @db.Decimal(20, 2)
+  emissions_limit_2024_2029_tco2e_sf Decimal? @db.Decimal(20, 2)
+  emissions_limit_2030_2034_tco2e_sf Decimal? @db.Decimal(20, 2)
+  emissions_limit_2035_2039_tco2e_sf Decimal? @db.Decimal(20, 2)
+  emissions_limit_2040_2049_tco2e_sf Decimal? @db.Decimal(20, 2)
+  emission_cap_2024_2029_tco2        Decimal? @db.Decimal(20, 2)
+  emission_cap_2030_2034_tco2        Decimal? @db.Decimal(20, 2)
+  emission_cap_2035_2039_tco2        Decimal? @db.Decimal(20, 2)
+  emission_cap_2040_2049_tco2        Decimal? @db.Decimal(20, 2)
 
   @@id([property_id, property_type])
 }
@@ -53,10 +54,10 @@ model property {
 model energy {
   property_id         Int
   energy_type         String   @db.VarChar(50)
-  energy_usage        Decimal? @db.Decimal(20,2)
+  energy_usage        Decimal? @db.Decimal(20, 2)
   energy_usage_unit   String?  @db.VarChar(20)
-  cce_2024_2029_tco2e Decimal? @db.Decimal(20,2)
-  cce_2030_2034_tco2e Decimal? @db.Decimal(20,2)
+  cce_2024_2029_tco2e Decimal? @db.Decimal(20, 2)
+  cce_2030_2034_tco2e Decimal? @db.Decimal(20, 2)
 
   @@id([property_id, energy_type])
 }
@@ -77,4 +78,25 @@ model compliance {
   ll87_compliant                      Boolean?
   ll87_compliance_year                Int?
   created_year                        Int?
+}
+
+model violations {
+  isn_dob_bis_viol     Int       @id @default(autoincrement())
+  issue_date           DateTime? @db.Date
+  violation_type_code  String?   @db.VarChar(255)
+  violation_number     String?   @db.VarChar(255)
+  house_number         String?   @db.VarChar(255)
+  street               String?   @db.VarChar(255)
+  disposition_comments String?
+  device_number        String?   @db.VarChar(255)
+  description          String?
+  number               String?   @db.VarChar(255)
+  violation_category   String?   @db.VarChar(255)
+  violation_type       String?   @db.VarChar(255)
+  bin                  String?   @db.VarChar(255)
+  disposition_date     DateTime? @db.Date
+  ecb_number           String?   @db.VarChar(255)
+  bbl                  String    @db.VarChar(255)
+  violation_type_clean String?   @db.VarChar(255)
+  category             String?   @db.VarChar(255)
 }

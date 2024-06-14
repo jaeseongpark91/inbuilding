@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.17",
     "@mui/x-data-grid": "^7.4.0",
-    "@prisma/client": "^5.14.0",
+    "@prisma/client": "^5.15.0",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
@@ -36,6 +36,11 @@
   },
   "devDependencies": {
     "@types/d3": "^7.4.3",
-    "prisma": "^5.10.2"
-  }
+    "prisma": "^5.15.0"
+  },
+  "description": "Help building owners to accelerate decarbonization.",
+  "main": "next.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

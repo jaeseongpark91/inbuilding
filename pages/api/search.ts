@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 
 export default async function handler(
@@ -65,7 +65,7 @@ export default async function handler(
                 } else {
                     throw new Error("Invalid provider id");
                 };
-            // Invalid table name provided
+
             } 
             // Search on the property table
             else if (req.query.table === 'energy') {
@@ -83,7 +83,26 @@ export default async function handler(
                 } else {
                     throw new Error("Invalid provider id");
                 };
-            } else {
+            }   
+            // Search on the violations table
+            else if (req.query.table === 'violations') {
+                // const queryValue = parseInt(query, 10); // Convert string to number
+                // Check if the parsed queryValue is a valid number
+                if (query !== null && typeof query === 'string' && query.trim().length > 0) {
+                    const violations = await prisma.violations.findMany({
+                        where: {
+                            bbl: {
+                                equals: query,
+                            },
+                        }
+                    });
+                    res.status(200).json({ violations });
+                } else {
+                    throw new Error("Invalid provider id");
+                };
+            }
+            // Invalid table name provided
+            else {
                 throw new Error("Invalid table name");
             }
         } catch (error) {
